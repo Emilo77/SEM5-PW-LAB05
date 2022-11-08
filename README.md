@@ -1,4 +1,16 @@
-#Laboratoria 5
+# Laboratoria 5
+
+Do scenariusza dołączone zostały przykłady:
+- [BankDatabase.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/BankDatabase.java)
+- [BigFile.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/BigFile.java)
+- [Fibonacci.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Fibonacci.java)
+- [HomemadeFuture.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/HomemadeFuture.java)
+- [Ones.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Ones.java)
+- [Pyramid.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Pyramid.java)
+- [RabbitAndTurtle.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/RabbitAndTurtle.java)
+- [Squares.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Squares.java)
+- [ThreadsVsFutures.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/ThreadsVsFutures.java)
+- [Utils.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Utils.java)
 
 ## Obliczenia
 
@@ -40,7 +52,7 @@ Metoda `get()` zgłasza wyjątek `InterruptedException` w przypadku, gdy oczekuj
 
 Pracę wykonywacza kończy metoda `shutdown()`.
 
-Program `Squares.java` demonstruje zastosowanie wykonywacza.
+Program [Squares.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Squares.java) demonstruje zastosowanie wykonywacza.
 
 ## Wyniki zbiorcze
 
@@ -48,7 +60,7 @@ Gdy chcemy zlecić na raz wykonanie wielu obliczeń i zaczekać na zakończenie 
 
 Argument `tasks` tej metody jest kolekcją obliczeń typu `Callable<T>` a wynik jest typu `List<Future<T>>`.
 
-Program `Pyramid.java` demonstruje zastosowanie metody `invokeAll()`.
+Program [Pyramid.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Pyramid.java) demonstruje zastosowanie metody `invokeAll()`.
 
 ## Model fork/join
 
@@ -56,35 +68,37 @@ Obliczenia, w których większa praca jest rekurencyjnie dzielona na części, m
 
 Praca w tym modelu jest wartością typu [ForkJoinTask](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ForkJoinTask.html)`<T>`.
 
-Praca będąca akcją jest reprezentowana przez obiekt podklasy klasy RecursiveAction. W klasie tej definiujemy metodę compute(), wykonującą akcję.
+Praca będąca akcją jest reprezentowana przez obiekt podklasy klasy `RecursiveAction`. W klasie tej definiujemy metodę `compute()`, wykonującą akcję.
 
-Praca będąca obliczeniem wartości typu V jest reprezentowana przez obiekt podklasy klasy RecursiveTask<V>. Metoda compute() tej klasy ma dać wynik typu V.
+Praca będąca obliczeniem wartości typu `V` jest reprezentowana przez obiekt podklasy klasy `RecursiveTask<V>`. Metoda `compute()` tej klasy ma dać wynik typu `V`.
 
-Podczas obliczenia, za pomocą metody fork() możemy uruchomić nowe obliczenie, wykonujące się współbieżnie z obliczeniem aktualnym. Jako wynik dostajemy wartość typu ForkJoinTask. Metodą join(), z wynikiem typu T, czekamy na zakończenie obliczenia.
+Podczas obliczenia, za pomocą metody `fork()` możemy uruchomić nowe obliczenie, wykonujące się współbieżnie z obliczeniem aktualnym. Jako wynik dostajemy wartość typu `ForkJoinTask`. Metodą `join()`, z wynikiem typu `T`, czekamy na zakończenie obliczenia.
 
-Wykonywacz obliczenia fork/join jest obiektem klasy ForkJoinPool. Ma metodę invoke(task) z argumentem task typu ForkJoinTask<T>. Uruchamia ona obliczenie task i czeka na jego zakończenie. Daje wynik typu T.
+Wykonywacz obliczenia `fork` / `join` jest obiektem klasy `ForkJoinPool`. Ma metodę `invoke(task)` z argumentem `task` typu `ForkJoinTask<T>`. Uruchamia ona obliczenie `task` i czeka na jego zakończenie. Daje wynik typu `T`.
 
-Program Ones.java demonstruje współbieżne rekurencjne wykonanie akcji.
+Program [Ones.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Ones.java) demonstruje współbieżne rekurencjne wykonanie akcji.
 
-Program Fibonacci.java demonstruje współbieżne rekurencyjne obliczenie.
+Program [Fibonacci.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Fibonacci.java) demonstruje współbieżne rekurencyjne obliczenie.
 
-Ćwiczenie punktowane (MatrixRowSumsExecutors)
+## Ćwiczenie punktowane (**MatrixRowSumsExecutors**)
 
 W rozwiązaniach zadań z poprzednich laboratoriów mieliśmy po jednym wątku liczącym elementy macierzy dla każdej jej kolumny.
 
 Dla macierzy o dużej liczbie kolumn, koszt tworzenia i zarządzania wątkami w takim programie byłby znaczny.
-Polecenie
+
+### Polecenie
 
 Napisz nową wersję programu, w której elementy macierzy są liczone przez czteroelementową pulę wątków. Obliczenie każdego elementu macierzy powinno być osobnym zleceniem dla puli. Sumowanie może się odbywać w wątku głównym.
-Materiał dodatkowy (nieobowiązkowy)
 
-Porównanie
+## Materiał dodatkowy (nieobowiązkowy)
 
-W pliku HomemadeFuture.java zaimplementowana została pula wątków. Korzysta ona z kolejek blokujących do rozdzielania pracy pomiędzy wątki i powiadamiania o zakończeniu obliczeń.
+### Porównanie
 
-Porównanie wydajności programu wykonującego wiele razy prostą czynność w wersji z wątkami i z pulą wątków zostało zaimplementowane w pliku ThreadsVsFutures.java
+W pliku [HomemadeFuture.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/HomemadeFuture.java) zaimplementowana została pula wątków. Korzysta ona z kolejek blokujących do rozdzielania pracy pomiędzy wątki i powiadamiania o zakończeniu obliczeń.
 
-Obliczenia zależne
+Porównanie wydajności programu wykonującego wiele razy prostą czynność w wersji z wątkami i z pulą wątków zostało zaimplementowane w pliku [ThreadsVsFutures.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/ThreadsVsFutures.java)
+
+### Obliczenia zależne
 
 Często jest tak, że chcemy wykonać pewną sekwencję obliczeń w sposób asynchroniczny. Najczęściej chodzi o sekwencje kroków korzystających z I/O, czyli pisania lub czytania do plików, łączenia się z bazą danych, wysyłania zapytań przez internet itd.
 
@@ -94,47 +108,47 @@ Przesyłanie plików przez sieć trwa znacznie dłużej niż przesyłanie krótk
 
 W skrócie schemat działania wyglądałby tak:
 
-    Przyjęcie zapytania od użytkownika
-    Wysłanie zapytania do bazy danych
-    (Jeśli jest obrazek) Zapisanie obrazka
-    Odesłanie użytkownikowi potwierdzenia
+- Przyjęcie zapytania od użytkownika
+- Wysłanie zapytania do bazy danych
+- (Jeśli jest obrazek) Zapisanie obrazka
+- Odesłanie użytkownikowi potwierdzenia
 
-Zauważmy, że każdy z tych punktów może trwać dość długo. Wątek ma tak naprawdę niewiele rzeczywistej "pracy" do wykonania - większość czasu spędza na czekaniu, aż coś się wyśle/odbierze/zapisze. Gdyby do obsługi każdego zapytania wykorzystywany był jeden wątek, to wątek ten blokowałby się/usypiał do czasu wykonania każdego z punktów. Ponieważ przełączanie aktualnie wykonującego się wątku nie jest darmowe, wydajniejsze będzie rozdzielenie pracy pomiędzy wątki z puli w taki sposób, aby jednostkę pracy stanowił jeden punkt z powyższego schematu. Problemem jest jednak to, że każdy punkt zależy od wyniku poprzedniego. Trudno taką sytuację zamodelować przy użyciu jedynie interfejsu Future.
-CompletableFuture
+Zauważmy, że każdy z tych punktów może trwać dość długo. Wątek ma tak naprawdę niewiele rzeczywistej "pracy" do wykonania - [większość czasu spędza na czekaniu, aż coś się wyśle/odbierze/zapisze](https://en.wikipedia.org/wiki/I/O_bound). Gdyby do obsługi każdego zapytania wykorzystywany był jeden wątek, to wątek ten blokowałby się/usypiał do czasu wykonania każdego z punktów. Ponieważ przełączanie aktualnie wykonującego się wątku nie jest darmowe, wydajniejsze będzie rozdzielenie pracy pomiędzy wątki z puli w taki sposób, aby jednostkę pracy stanowił jeden punkt z powyższego schematu. Problemem jest jednak to, że każdy punkt zależy od wyniku poprzedniego. Trudno taką sytuację zamodelować przy użyciu jedynie interfejsu `Future`.
 
-Rozwiązaniem powyższego problemu jest wprowadzony w Javie 8 interfejs CompletableFuture. Pozwala on wygodnie (korzystając z paradygmatu programowania funkcyjnego) tworzyć obliczenia asynchroniczne, które mogą korzystać z wyników wcześniejszych obliczeń. Aby wytworzyć CompletableFuture możemy użyć metody supplyAsync, która zleca uruchomienie przekazanego w argumencie obliczenia synchronicznego w wątku ze wspólnej puli zarządzanej przez maszynę wirtualną Javy.
+### CompletableFuture
 
-Na utworzonym w ten sposób obiekcie możemy zarejestrować tzw. callback, czyli funkcję, która wykona się po zakończeniu danego obliczenia. Służy do tego metoda thenApplyAsync (w językach funkcyjnych często nazywana map). Bierze ona jako argument funkcję z wyniku obecnego obliczenia (które jest, dajmy na to, typu T) w coś typu, powiedzmy, U. thenApplyAsync zwraca w takim przypadku obiekt typu CompletableFuture<U>.
+Rozwiązaniem powyższego problemu jest wprowadzony w Javie 8 interfejs [CompletableFuture](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/CompletableFuture.html). Pozwala on wygodnie (korzystając z paradygmatu programowania funkcyjnego) tworzyć obliczenia asynchroniczne, które mogą korzystać z wyników wcześniejszych obliczeń. Aby wytworzyć `CompletableFuture` możemy użyć metody `supplyAsync`, która zleca uruchomienie przekazanego w argumencie obliczenia synchronicznego w wątku ze wspólnej puli zarządzanej przez maszynę wirtualną Javy.
 
-Co jeśli jednak chcemy zlecić kolejne obliczenie asynchroniczne (tzn. zwracające CompletableFuture<T>)? Wówczas metoda thenApplyAsync zwróciłaby obiekt typu CompletableFuture<CompletableFuture<U>>;. Aby uniknąć takiego zagnieżdżenia i "spłaszczyć" typ zwracanego obiektu należy wykorzystać metodę thenComposeAsync (w językach funkcyjnych: flatMap lub bind).
+Na utworzonym w ten sposób obiekcie możemy zarejestrować tzw. **callback**, czyli funkcję, która wykona się po zakończeniu danego obliczenia. Służy do tego metoda `thenApplyAsync` (w językach funkcyjnych często nazywana `map`). Bierze ona jako argument funkcję z wyniku obecnego obliczenia (które jest, dajmy na to, typu T) w coś typu, powiedzmy, `U`. `thenApplyAsync` zwraca w takim przypadku obiekt typu `CompletableFuture<U>`.
 
-Często jest tak, że chcemy zaczekać na zakończenie kilku obliczeń, zanim przejdziemy dalej. W Javie interfejs CompletableFuture ma metody allOf(CompletableFuture... cfs) oraz anyOf(CompletableFuture... cfs), które pozwalają zaczekać na – odpowiednio – wszystkie obliczenia przekazane jako argumenty lub tylko to z nich, które zakończy się jako pierwsze. W praktyce ze względu na tzw. type erasure w Javie dość niewygodnie się z nich korzysta, dlatego w klasie Utils zdefiniowaliśmy dla Państwa ich wygodniejsze odpowiedniki.
+Co jeśli jednak chcemy zlecić kolejne obliczenie asynchroniczne (tzn. zwracające `CompletableFuture<T>`)? Wówczas metoda `thenApplyAsync` zwróciłaby obiekt typu `CompletableFuture<CompletableFuture<U>>;`. Aby uniknąć takiego zagnieżdżenia i "spłaszczyć" typ zwracanego obiektu należy wykorzystać metodę `thenComposeAsync` (w językach funkcyjnych: `flatMap` lub `bind`).
 
-W pliku RabbitAndTurtle.java zademonstrowane zostało, jak korzystać z metody awaitAny.
+Często jest tak, że chcemy zaczekać na zakończenie kilku obliczeń, zanim przejdziemy dalej. W Javie interfejs `CompletableFuture` ma metody `allOf(CompletableFuture... cfs)` oraz `anyOf(CompletableFuture... cfs)`, które pozwalają zaczekać na – odpowiednio – wszystkie obliczenia przekazane jako argumenty lub tylko to z nich, które zakończy się jako pierwsze. W praktyce ze względu na tzw. `type erasure` w Javie dość niewygodnie się z nich korzysta, dlatego w klasie `Utils` zdefiniowaliśmy dla Państwa ich wygodniejsze odpowiedniki.
 
-Plik BigFile.java pokazuje natomiast zastosowanie CompletableFuture do asynchronicznych operacji I/O.
+W pliku [RabbitAndTurtle.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/RabbitAndTurtle.java) zademonstrowane zostało, jak korzystać z metody `awaitAny`.
+
+Plik [BigFile.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/BigFile.java) pokazuje natomiast zastosowanie `CompletableFuture` do asynchronicznych operacji I/O.
 Materiały dodatkowe
 
-Polecamy Państwa uwadze następujące artykuły:
+### Polecamy Państwa uwadze następujące artykuły:
 
-    wprowadzenie do programowania asynchronicznego (w Javascripcie, ale język nie ma tu wielkiego znaczenia) – Mozilla Developer Network, Asynchronous JavaScript
+- wprowadzenie do programowania asynchronicznego (w Javascripcie, ale język nie ma tu wielkiego znaczenia) – [Mozilla Developer Network, Asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Concepts)
+- Dokumentacja dot. programowania asynchronicznego w różnych językach
+    - [Scala](https://docs.scala-lang.org/overviews/core/futures.html)
+    - [Rust](https://rust-lang.github.io/async-book/01_getting_started/04_async_await_primer.html)
+    - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/await)
+    - [Swift](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html)
 
-    Dokumentacja dot. programowania asynchronicznego w różnych językach
-        Scala
-        Rust
-        C#
-        Swift
+### Ćwiczenie dodatkowe (BankDatabase)
 
-Ćwiczenie dodatkowe (BankDatabase)
+W pliku [BankDatabase.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/BankDatabase.java) mamy klasę symulującą łączenie się z bazą danych. Baza danych zawiera informacje o stanach kont pewnych klientów. Łączenie się z bazą danych jest przykładem czynności ograniczonej przez I/O, co jest zasymulowane w kodzie przez `sleep`. Zdefiniowana jest metoda `robinHood`, która:
 
-W pliku BankDatabase.java mamy klasę symulującą łączenie się z bazą danych. Baza danych zawiera informacje o stanach kont pewnych klientów. Łączenie się z bazą danych jest przykładem czynności ograniczonej przez I/O, co jest zasymulowane w kodzie przez sleep. Zdefiniowana jest metoda robinHood, która:
+- Pobiera listę klientów banku
+- Dla każdego klienta pobiera stan jego konta
+- Znajduje klienta o najwyższym stanie konta
+- Rozdziela majątek tego tego klienta pomiędzy pozostałych klientów
+- Zamyka jego konto
 
-    Pobiera listę klientów banku
-    Dla każdego klienta pobiera stan jego konta
-    Znajduje klienta o najwyższym stanie konta
-    Rozdziela majątek tego tego klienta pomiędzy pozostałych klientów
-    Zamyka jego konto
+### Polecenie
 
-Polecenie
-
-Napisz asynchroniczną wersję metody robinHood, korzystającą z CompletableFuture. Nie możesz zmieniać istniejącego kodu. Możesz korzystać z funkcji zdefiniowanych w pliku Utils.java. 
+Napisz asynchroniczną wersję metody `robinHood`, korzystającą z `CompletableFuture`. Nie możesz zmieniać istniejącego kodu. Możesz korzystać z funkcji zdefiniowanych w pliku [Utils.java](https://github.com/Emilo77/SEM5-PW-LAB05/blob/master/src/przyklady05/Utils.java). 
